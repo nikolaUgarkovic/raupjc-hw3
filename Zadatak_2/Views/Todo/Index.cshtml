@@ -1,0 +1,29 @@
+﻿@using Zadatak_1
+@using Zadatak_2.Models
+@model Zadatak_2.Models.IndexViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Active tasks</title>
+</head>
+<body>
+<h1 style="margin-top: 1em">Todo</h1>
+<a asp-controller="Todo" asp-action="Add" style="margin-right: 5em; margin-top: 10em; margin-bottom: 5em"><b>Add new todo</b></a>
+<a asp-controller="Todo" asp-action="Completed" style="margin-top: 5em; margin-bottom: 5em"><b>   See completed todos</b></a>
+@foreach (var item in @Model.IndexTodoModels)
+{
+    <div >
+        <p style=" margin-top: 40px"><b>@item.Text</b></p>      
+        <p style="margin-right: 65em; float:right; color: crimson; " ><b>@item.DaysTillDue()</b></p>
+    </div>
+    <div style="float:bottom">
+        <h6 >@item.DateDue</h6>
+        <h6>@Html.ActionLink("Mark as completed", "MarkAsCompleted", new { id = item.Id })</h6>
+    </div>
+}
+</body>
+</html>
